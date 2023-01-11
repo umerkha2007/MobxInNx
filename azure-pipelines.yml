@@ -7,7 +7,7 @@ trigger:
 - main
 
 pool:
-  default
+  vmImage: ubuntu-latest
 
 steps:
 - script: yarn nx affected --target=lint
