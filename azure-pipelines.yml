@@ -10,6 +10,27 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: "14.x"
+  displayName: "Install Node.js"
+
+- task: npmAuthenticate@0
+  inputs:
+    workingFile: ".npmrc"
+
+- task: Cache@2
+  inputs:
+    key: 'mv-ui | yarn | "$(Agent.OS)" | yarn.lock'
+    restoreKeys: |
+      mv-ui | yarn | "$(Agent.OS)"
+    path: $(YARN_CACHE_FOLDER)
+  displayName: Cache Yarn packages
+
+- script: yarn --frozen-lockfile
+  displayName: yarn install --frozen-lockfile
+
+
 - script: yarn nx affected --target=lint
   displayName: "Nx - Run Affected Linting"
 
