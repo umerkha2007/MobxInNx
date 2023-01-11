@@ -18,12 +18,17 @@ steps:
 - script: yarn
   displayName: yarn install
 
+- script: yarn nx run-many --target=build --all
+  displayName: "Nx - Build All Projects"
 
-- script: yarn nx affected --target=lint
-  displayName: "Nx - Run Affected Linting"
+- script: yarn nx run-many --target=test --all
+  displayName: "Nx - Test All Projects"
 
-- script: yarn nx affected --target=test --reporters=jest-junit --ci --parallel=3 --codeCoverage
-  displayName: "Nx - Run Affected Tests and Get Coverage"
+# - script: yarn nx affected --target=lint
+#   displayName: "Nx - Run Affected Linting"
+
+# - script: yarn nx affected --target=test --reporters=jest-junit --ci --parallel=3 --codeCoverage
+#   displayName: "Nx - Run Affected Tests and Get Coverage"
 
 - task: SonarCloudPrepare@1
   inputs:
