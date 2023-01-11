@@ -21,7 +21,7 @@ steps:
 - script: yarn nx run-many --target=build --all
   displayName: "Nx - Build All Projects"
 
-- script: yarn nx run-many --target=test --all
+- script: yarn nx run-many --target=test --projects=sonar-cloud --codeCoverage --coverageDirectory='./coverageReports' 
   displayName: "Nx - Test All Projects"
 
 # - script: yarn nx affected --target=lint
